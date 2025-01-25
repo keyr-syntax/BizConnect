@@ -24,7 +24,7 @@ export default function Navbar() {
             >
               <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
               <Link to={`/add_company`}>
-                <Menubar.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[15px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
+                <Menubar.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[20px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
                   Add Company
                 </Menubar.Item>
               </Link>
@@ -45,12 +45,13 @@ export default function Navbar() {
             >
               <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
               <Link to={`/add_contact`}>
-                <Menubar.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[15px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
+                <Menubar.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[20px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
                   Add Contact
                 </Menubar.Item>
               </Link>
+              <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
               <Link to={`/all_contacts`}>
-                <Menubar.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[15px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
+                <Menubar.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[20px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
                   Contact List
                 </Menubar.Item>
               </Link>
