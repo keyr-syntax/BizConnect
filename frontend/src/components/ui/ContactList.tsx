@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Trash2, Pencil, Check, X } from "lucide-react";
 import { useEffect } from "react";
+import Loading from "./loading";
 export default function ContactList() {
   const {
     FetchAllContacts,
@@ -24,6 +25,7 @@ export default function ContactList() {
     UpdateContactDetails,
     FetchContactByID,
     DeleteContact,
+    loading,
   } = contactStore();
   const contactDetails = {
     contactName: contactName,
@@ -39,15 +41,17 @@ export default function ContactList() {
 
   return (
     <>
-      {allContactsList && allContactsList.length > 0 && (
+      {loading && <Loading />}
+      {!loading && allContactsList && allContactsList.length > 0 && (
         <Table className="text-white border border-solid w-[95%] mt-[80px]">
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Company</TableHead>
+              <TableHead>Role</TableHead>
               <TableHead>Phone</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
+
               <TableHead className="text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -86,7 +90,20 @@ export default function ContactList() {
                     <span>{contact.companyName}</span>
                   )}
                 </TableCell>
-
+                <TableCell>
+                  {contactID !== null && contactID === contact.id ? (
+                    <Textarea
+                      value={role}
+                      onChange={(e) => {
+                        contactStore.setState({
+                          role: e.target.value,
+                        });
+                      }}
+                    />
+                  ) : (
+                    <span>{contact.role}</span>
+                  )}
+                </TableCell>
                 <TableCell>
                   {contactID !== null && contactID === contact.id ? (
                     <Textarea
@@ -116,20 +133,7 @@ export default function ContactList() {
                     <span>{contact.email}</span>
                   )}
                 </TableCell>
-                <TableCell>
-                  {contactID !== null && contactID === contact.id ? (
-                    <Textarea
-                      value={role}
-                      onChange={(e) => {
-                        contactStore.setState({
-                          role: e.target.value,
-                        });
-                      }}
-                    />
-                  ) : (
-                    <span>{contact.role}</span>
-                  )}
-                </TableCell>
+
                 <TableCell className="flex flex-row items-center justify-center mt-2 gap-4">
                   {contactID !== null && contactID === contact.id ? (
                     <Check
@@ -167,6 +171,11 @@ export default function ContactList() {
             ))}
           </TableBody>
         </Table>
+      )}
+      {!loading && allContactsList && allContactsList.length === 0 && (
+        <p className="my-[20%] text-white text-[20px] mx-auto text-center">
+          No Contacts found
+        </p>
       )}
     </>
   );

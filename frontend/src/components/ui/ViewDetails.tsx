@@ -11,6 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Trash2, Pencil, Check, X } from "lucide-react";
+import Loading from "./loading";
+
 export default function ViewDetails() {
   const {
     FetchCompanyByID,
@@ -23,6 +25,7 @@ export default function ViewDetails() {
     companyID,
     UpdateCompanyData,
     DeleteCompany,
+    loading,
   } = companyStateStore();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -42,7 +45,8 @@ export default function ViewDetails() {
 
   return (
     <>
-      {company && (
+      {loading && <Loading />}
+      {!loading && company && (
         <Table className="text-white mt-[80px] border border-solid border-[rgb(255,255,255,0.2)] w-[95%]">
           <TableHeader>
             <TableRow className="border border-solid border-[rgb(255,255,255,0.2)]">
@@ -166,7 +170,7 @@ export default function ViewDetails() {
           </TableBody>
         </Table>
       )}
-      {contactList && contactList.length > 0 && (
+      {!loading && contactList && contactList.length > 0 && (
         <Table className="text-white border border-solid w-[95%] mt-10">
           <TableHeader>
             <TableRow>
@@ -202,6 +206,11 @@ export default function ViewDetails() {
             ))}
           </TableBody>
         </Table>
+      )}
+      {!loading && contactList && contactList.length === 0 && (
+        <p className="my-[5%] text-white text-[20px] mx-auto text-center px-5">
+          You haven't added contacts for {companyName}
+        </p>
       )}
     </>
   );

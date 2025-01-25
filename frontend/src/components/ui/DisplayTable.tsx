@@ -11,6 +11,7 @@ import { companyStateStore } from "@/store/GlobalState";
 import { useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Link, useNavigate } from "react-router-dom";
+import Loading from "./loading";
 
 export default function DisplayTable() {
   const {
@@ -24,6 +25,7 @@ export default function DisplayTable() {
     UpdateCompanyData,
     DeleteCompany,
     FetchCompanyDataForEditing,
+    loading,
   } = companyStateStore();
   const navigate = useNavigate();
   useEffect(() => {
@@ -37,8 +39,9 @@ export default function DisplayTable() {
   };
   return (
     <>
-      {company_list && company_list.length > 0 ? (
-        <Table className="text-white mt-[80px] border border-solid border-[rgb(255,255,255,0.2)] w-[95%]">
+      {loading && <Loading />}
+      {!loading && company_list && company_list.length > 0 && (
+        <Table className="text-white mt-[80px] border border-solid  w-[95%]">
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">Company Name</TableHead>
@@ -171,8 +174,11 @@ export default function DisplayTable() {
               ))}
           </TableBody>
         </Table>
-      ) : (
-        <p>No Company data found</p>
+      )}
+      {!loading && company_list && company_list.length === 0 && (
+        <p className="my-[20%] text-white text-[20px] mx-auto text-center">
+          No Company data found
+        </p>
       )}
     </>
   );
