@@ -42,6 +42,7 @@ export default function ViewDetails() {
     loading,
     CreateContact,
     COMPANY_NAME,
+    NullifyCompanyID,
   } = contactStore();
 
   const { id } = useParams();
@@ -50,8 +51,11 @@ export default function ViewDetails() {
   useEffect(() => {
     if (id) {
       FetchCompanyByID(id, navigate);
+      if (NullifyCompanyID) {
+        NullifyCompanyID();
+      }
     }
-  }, [FetchCompanyByID, id, navigate]);
+  }, [FetchCompanyByID, id, navigate, NullifyCompanyID]);
   const contactDetails = {
     contactName: contactName,
     companyName: COMPANY_NAME,

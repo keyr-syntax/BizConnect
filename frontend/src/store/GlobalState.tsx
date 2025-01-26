@@ -118,6 +118,9 @@ export const companyStateStore = create<COMPANY_API_RESPONSE>((set) => ({
         set({ loading: false });
         toast.error(response.message);
         navigate("/");
+        contactStore.setState({
+          COMPANY_ID: null,
+        });
       }
     } catch (error) {
       console.log("Error while fetching company", error);
@@ -273,6 +276,7 @@ interface CONTACT_API_RESPONSE {
   }) => Promise<void>;
   COMPANY_ID?: string | null;
   COMPANY_NAME?: string | null;
+  NullifyCompanyID?: () => Promise<void>;
 }
 
 export const contactStore = create<CONTACT_API_RESPONSE>((set) => ({
@@ -589,5 +593,8 @@ export const contactStore = create<CONTACT_API_RESPONSE>((set) => ({
         toast.error("Failed to delete contact");
       }
     }
+  },
+  NullifyCompanyID: async () => {
+    set({ COMPANY_ID: null });
   },
 }));

@@ -514,32 +514,65 @@ export function AddCompany({
                       </div>
                     </div>
                   </div>
-                  {!displayButtonForEdit && (
-                    <Button
-                      onClick={() => {
-                        saveContact();
-                      }}
-                      type="submit"
-                      className="w-full bg-[#0D6EFD] text-lg hover:bg-[#0DEFD]"
-                      disabled={loading}
-                    >
-                      {loading ? "Saving contact.." : "Save contact"}
-                    </Button>
-                  )}
-                  {displayButtonForEdit && (
-                    <Button
-                      onClick={() => {
-                        if (contactID !== null) {
-                          editContact(contactID);
-                        }
-                      }}
-                      type="submit"
-                      className="w-full bg-[#0D6EFD] text-lg hover:bg-[#0DEFD]"
-                      disabled={loading}
-                    >
-                      {loading ? "Updating contact.." : "Update contact"}
-                    </Button>
-                  )}
+
+                  <div className="flex flex-row gap-4 justify-center mb-16 flex-wrap">
+                    {!displayButtonForEdit && (
+                      <Button
+                        onClick={() => {
+                          saveContact();
+                        }}
+                        type="submit"
+                        className="block w-auto bg-[#0D6EFD] mt-5 px-5 text-lg hover:bg-[#0DEFD]"
+                        disabled={loading}
+                      >
+                        {loading ? "Saving contact.." : "Save contact"}
+                      </Button>
+                    )}
+                    {!displayButtonForEdit && (
+                      <Button
+                        onClick={() => {
+                          setshowContactForm(false);
+                        }}
+                        type="submit"
+                        className="block w-auto  text-lg hover:bg-red-800 mt-5 px-5 bg-red-800"
+                        disabled={loading}
+                      >
+                        Cancel
+                      </Button>
+                    )}
+                  </div>
+                  <div className="flex flex-row gap-4 justify-center flex-wrap">
+                    {displayButtonForEdit && (
+                      <Button
+                        onClick={() => {
+                          if (contactID !== null) {
+                            editContact(contactID);
+                          }
+                        }}
+                        type="submit"
+                        className="w-1/2 bg-[#0D6EFD] text-lg hover:bg-[#0DEFD]"
+                        disabled={loading}
+                      >
+                        {loading ? "Updating contact.." : "Update contact"}
+                      </Button>
+                    )}
+                    {displayButtonForEdit && (
+                      <Button
+                        onClick={() => {
+                          if (contactID !== null) {
+                            setcontactID(null);
+                            setdisplayButtonForEdit(false);
+                            setshowContactForm(false);
+                          }
+                        }}
+                        type="submit"
+                        className="w-1/2 bg-red-700 text-lg hover:bg-[#0DEFD]"
+                        disabled={loading}
+                      >
+                        Cancel
+                      </Button>
+                    )}
+                  </div>
                 </>
               )}
               {showMoreContactBtn && !showContactForm && (

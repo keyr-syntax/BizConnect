@@ -10,10 +10,14 @@ export default function Navbar() {
             <Link to="/">BizConnect</Link>
           </Menubar.Trigger>
         </Menubar.Menu>
-
         <Menubar.Menu>
           <Menubar.Trigger className="flex text-white select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[20px]  leading-none text-violet11 outline-none data-[highlighted]:bg-violet4 data-[state=open]:bg-violet4">
-            Company
+            <Link to="/add_company">Add New Company</Link>
+          </Menubar.Trigger>
+        </Menubar.Menu>
+        {/* <Menubar.Menu>
+          <Menubar.Trigger className="flex text-white select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[20px]  leading-none text-violet11 outline-none data-[highlighted]:bg-violet4 data-[state=open]:bg-violet4">
+            Add New Company
           </Menubar.Trigger>
           <Menubar.Portal>
             <Menubar.Content
@@ -31,8 +35,8 @@ export default function Navbar() {
               <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
             </Menubar.Content>
           </Menubar.Portal>
-        </Menubar.Menu>
-        <Menubar.Menu>
+        </Menubar.Menu> */}
+        {/* <Menubar.Menu>
           <Menubar.Trigger className="flex text-white select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[20px]  leading-none text-violet11 outline-none data-[highlighted]:bg-violet4 data-[state=open]:bg-violet4">
             Contacts
           </Menubar.Trigger>
@@ -58,7 +62,7 @@ export default function Navbar() {
               <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
             </Menubar.Content>
           </Menubar.Portal>
-        </Menubar.Menu>
+        </Menubar.Menu> */}
       </Menubar.Root>
       <Outlet />
     </>

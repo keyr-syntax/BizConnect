@@ -29,6 +29,23 @@ export const createCompanyDetails = async (
     return;
   }
 
+  const doesCompanyExist = await COMPANY_LIST.findOne({
+    where: {
+      companyName: companyName,
+      companyAddress: companyAddress,
+      companyWebsite: companyWebsite,
+      companyCategory: companyCategory,
+    },
+  });
+  if (doesCompanyExist) {
+    res.status(400).json({
+      success: true,
+      message: "Company already exists",
+      company: doesCompanyExist,
+    });
+    return;
+  }
+
   try {
     const newCompany = await COMPANY_LIST.create({
       companyName,
