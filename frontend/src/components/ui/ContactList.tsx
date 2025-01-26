@@ -33,7 +33,7 @@ export default function ContactList() {
     phone: phone,
     email: email,
     role: role,
-    companyID: companyID,
+    companyID: companyID ?? undefined,
   };
   useEffect(() => {
     FetchAllContacts();
@@ -63,7 +63,7 @@ export default function ContactList() {
                     <Textarea
                       title="name"
                       className="text-white text-md"
-                      value={contactName}
+                      value={contactName ?? ""}
                       onChange={(e) => {
                         contactStore.setState({
                           contactName: e.target.value,
@@ -79,7 +79,7 @@ export default function ContactList() {
                     <Textarea
                       title="company name"
                       className="text-white text-md"
-                      value={companyName}
+                      value={companyName ?? ""}
                       onChange={(e) => {
                         contactStore.setState({
                           companyName: e.target.value,
@@ -93,7 +93,7 @@ export default function ContactList() {
                 <TableCell>
                   {contactID !== null && contactID === contact.id ? (
                     <Textarea
-                      value={role}
+                      value={role ?? ""}
                       onChange={(e) => {
                         contactStore.setState({
                           role: e.target.value,
@@ -107,7 +107,7 @@ export default function ContactList() {
                 <TableCell>
                   {contactID !== null && contactID === contact.id ? (
                     <Textarea
-                      value={phone}
+                      value={phone ?? ""}
                       onChange={(e) => {
                         contactStore.setState({
                           phone: Number(e.target.value),
@@ -122,7 +122,7 @@ export default function ContactList() {
                 <TableCell>
                   {contactID !== null && contactID === contact.id ? (
                     <Textarea
-                      value={email}
+                      value={email ?? ""}
                       onChange={(e) => {
                         contactStore.setState({
                           email: e.target.value,
@@ -160,7 +160,7 @@ export default function ContactList() {
                   ) : (
                     <Trash2
                       onClick={() => {
-                        DeleteContact(contact.id);
+                        DeleteContact(contact.id, contact.companyID);
                       }}
                       size={28}
                       className="cursor-pointer"

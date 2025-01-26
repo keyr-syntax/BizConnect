@@ -7,7 +7,7 @@ export default function Navbar() {
       <Menubar.Root className="bg-[#151533] flex flex-row items-center justify-evenly bg-default p-3 border border-solid border-[rgb(255,255,255,0.2)] rounded-none  z-999 fixed top-0 left-0 right-0">
         <Menubar.Menu>
           <Menubar.Trigger className="flex text-white select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[24px]  leading-none text-violet11 outline-none data-[highlighted]:bg-violet4 data-[state=open]:bg-violet4">
-            <Link to="/">Home</Link>
+            <Link to="/">BizConnect</Link>
           </Menubar.Trigger>
         </Menubar.Menu>
 

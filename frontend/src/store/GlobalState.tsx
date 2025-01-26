@@ -243,32 +243,44 @@ interface CONTACT_API_RESPONSE {
   contactForEdit?: CONTACT;
   FetchContactByID: (id: number | string) => Promise<void>;
   FetchAllContacts: () => Promise<void>;
-  DeleteContact: (id: number) => Promise<void>;
+  DeleteContact: (id: number, ID: number) => Promise<void>;
   UpdateContactDetails: (
     id: number,
     contactDetails: {
-      contactName?: string;
-      companyName?: string;
-      phone?: number;
-      email?: string;
-      role?: string;
-      companyID?: number;
+      contactName?: string | null;
+      companyName?: string | null;
+      phone?: number | null;
+      email?: string | null;
+      role?: string | null;
+      companyID?: number | string;
     }
   ) => Promise<void>;
   oneContactFetchedByID?: CONTACT;
   contactID?: number | null;
-  contactName?: string;
-  companyName?: string;
-  phone?: number;
-  email?: string;
-  role?: string;
-  companyID?: number;
+  contactName?: string | null;
+  companyName?: string | null;
+  phone?: number | null;
+  email?: string | null;
+  role?: string | null;
+  companyID?: number | null;
+  CreateContact?: (contactDetails: {
+    contactName?: string | null;
+    companyName?: string | null;
+    phone?: number | null;
+    email?: string | null;
+    role?: string | null;
+    companyID?: string | null;
+  }) => Promise<void>;
+  COMPANY_ID?: string | null;
+  COMPANY_NAME?: string | null;
 }
 
 export const contactStore = create<CONTACT_API_RESPONSE>((set) => ({
   allContactsList: [],
   contactID: null,
   loading: false,
+  COMPANY_ID: null,
+  COMPANY_NAME: null,
 
   FetchContactByID: async (id: number | string) => {
     try {
@@ -287,6 +299,7 @@ export const contactStore = create<CONTACT_API_RESPONSE>((set) => ({
           contactID: response.contact.id,
           contactName: response.contact.contactName,
           companyName: response.contact.companyName,
+          COMPANY_NAME: response.contact.companyName,
           phone: response.contact.phone,
           email: response.contact.email,
           role: response.contact.role,
@@ -295,15 +308,32 @@ export const contactStore = create<CONTACT_API_RESPONSE>((set) => ({
         });
       } else {
         toast.error(response.message);
-        set({ loading: false });
+        set({
+          contactID: null,
+          loading: false,
+          contactName: null,
+          companyName: null,
+          phone: null,
+          email: null,
+          role: null,
+          COMPANY_ID: null,
+        });
       }
     } catch (error) {
       console.log("Error while fetching contact", error);
       toast.error("Failed to edit contact");
-      set({ loading: false });
+      set({
+        contactID: null,
+        loading: false,
+        contactName: null,
+        companyName: null,
+        phone: null,
+        email: null,
+        role: null,
+        COMPANY_ID: null,
+      });
     }
   },
-
   FetchAllContacts: async () => {
     try {
       set({ loading: true });
@@ -318,31 +348,62 @@ export const contactStore = create<CONTACT_API_RESPONSE>((set) => ({
         set({
           allContactsList: response.contact,
           loading: false,
+          contactID: null,
+          contactName: null,
+          companyName: null,
+          phone: null,
+          email: null,
+          role: null,
+          COMPANY_ID: null,
         });
         console.log("allContactsList", response.contact);
       } else {
         set({
           allContactsList: [],
+          contactID: null,
           loading: false,
+          contactName: null,
+          companyName: null,
+          phone: null,
+          email: null,
+          role: null,
+          COMPANY_ID: null,
         });
         toast.error(response.message);
-        set({ loading: false });
+        set({
+          contactID: null,
+          loading: false,
+          contactName: null,
+          companyName: null,
+          phone: null,
+          email: null,
+          role: null,
+          COMPANY_ID: null,
+        });
       }
     } catch (error) {
       console.log("Error while fetching contacts", error);
-      set({ loading: false });
+      set({
+        contactID: null,
+        loading: false,
+        contactName: null,
+        companyName: null,
+        phone: null,
+        email: null,
+        role: null,
+        COMPANY_ID: null,
+      });
     }
   },
-
   UpdateContactDetails: async (
     id: number,
     contactDetails: {
-      contactName?: string;
-      companyName?: string;
-      phone?: number;
-      email?: string;
-      role?: string;
-      companyID?: number;
+      contactName?: string | null;
+      companyName?: string | null;
+      phone?: number | null;
+      email?: string | null;
+      role?: string | null;
+      companyID?: number | string;
     }
   ) => {
     try {
@@ -366,8 +427,17 @@ export const contactStore = create<CONTACT_API_RESPONSE>((set) => ({
         set({
           contactID: null,
           loading: false,
+          contactName: null,
+          companyName: null,
+          phone: null,
+          email: null,
+          role: null,
+          COMPANY_ID: null,
         });
 
+        companyStateStore.setState({
+          contactList: response.allContacts,
+        });
         await contactStore.getState().FetchAllContacts();
         toast.success("Data saved");
       } else {
@@ -377,16 +447,94 @@ export const contactStore = create<CONTACT_API_RESPONSE>((set) => ({
     } catch (error) {
       console.log("Error while fetching company", error);
       toast.error("Failed to fetch company");
-      set({ loading: false });
+      set({
+        contactID: null,
+        loading: false,
+        contactName: null,
+        companyName: null,
+        phone: null,
+        email: null,
+        role: null,
+        COMPANY_ID: null,
+      });
     }
   },
+  CreateContact: async (contactDetails: {
+    contactName?: string | null;
+    companyName?: string | null;
+    phone?: number | null;
+    email?: string | null;
+    role?: string | null;
+    companyID?: string | null;
+  }) => {
+    console.log("Create contact", contactDetails);
+    try {
+      set({ loading: true });
+      const data: Response = await fetch(
+        `${BACKEND_API}/contact/create_contact`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contactName: contactDetails.contactName,
+            role: contactDetails.role,
+            email: contactDetails.email,
+            companyID: contactDetails.companyID,
+            companyName: contactDetails.companyName,
+            phone: contactDetails.phone,
+          }),
+        }
+      );
+      const response = await data.json();
+      if (response.success) {
+        console.log("response.allContacts", response.allContacts);
+        set({
+          loading: false,
+          contactName: null,
+          companyName: null,
+          phone: null,
+          email: null,
+          role: null,
+          COMPANY_ID: null,
+          contactID: null,
+        });
+        companyStateStore.setState({
+          contactList: response.allContacts,
+        });
 
-  DeleteContact: async (id: number) => {
+        toast.success("Contact saved");
+      } else {
+        toast.error(response.message);
+        set({
+          loading: false,
+          allContactsList: [],
+        });
+      }
+    } catch (error) {
+      console.log("Error while creating contact details", error);
+
+      toast.error("Failed to add contact");
+      set({
+        loading: false,
+        allContactsList: [],
+        contactID: null,
+        contactName: null,
+        companyName: null,
+        phone: null,
+        email: null,
+        role: null,
+        COMPANY_ID: null,
+      });
+    }
+  },
+  DeleteContact: async (id: number, ID: number) => {
     if (window.confirm("Are you sure?")) {
       try {
         set({ loading: true });
         const data = await fetch(
-          `${BACKEND_API}/contact/delete_contact/${id}`,
+          `${BACKEND_API}/contact/delete_contact/${id}/${ID}`,
           {
             method: "DELETE",
             headers: {
@@ -398,14 +546,46 @@ export const contactStore = create<CONTACT_API_RESPONSE>((set) => ({
 
         if (response.success) {
           toast.success("Contact deleted");
+          companyStateStore.setState({
+            contactList: response.allContacts,
+          });
           await contactStore.getState().FetchAllContacts();
+          set({
+            contactID: null,
+            loading: false,
+            contactName: null,
+            companyName: null,
+            phone: null,
+            email: null,
+            role: null,
+            COMPANY_ID: null,
+          });
+          console.log("Delete response", response);
         } else {
           toast.error(response.message);
-          set({ loading: false });
+          set({
+            contactID: null,
+            loading: false,
+            contactName: null,
+            companyName: null,
+            phone: null,
+            email: null,
+            role: null,
+            COMPANY_ID: null,
+          });
         }
       } catch (error) {
         console.log("Error while deleting contact", error);
-        set({ loading: false });
+        set({
+          contactID: null,
+          loading: false,
+          contactName: null,
+          companyName: null,
+          phone: null,
+          email: null,
+          role: null,
+          COMPANY_ID: null,
+        });
         toast.error("Failed to delete contact");
       }
     }

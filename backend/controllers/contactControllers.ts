@@ -159,15 +159,21 @@ export const deleteContact = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const { id } = req.params;
+  const { id, ID } = req.params;
+
   try {
     const findContactByPK = await CONTACT_LIST.findByPk(id);
-
     if (findContactByPK) {
       await findContactByPK.destroy();
+      const fetchAllContactsByCompanyID = await CONTACT_LIST.findAll({
+        where: {
+          companyID: ID,
+        },
+      });
       res.status(200).json({
         success: true,
         message: "Contact deleted",
+        allContacts: fetchAllContactsByCompanyID,
       });
       return;
     } else {
