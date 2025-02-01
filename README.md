@@ -17,48 +17,33 @@ With BizConnect, businesses can efficiently manage their contacts and streamline
 
 ## First clone the repository into your Laptop
 ```sh
-https://github.com/keyr-syntax/Blog-platform.git
+https://github.com/keyr-syntax/BizConnect.git
 ```
 
-## Inside the backend folder fill the following values in .env file.
+## Inside the portfolio folder create .env file and  fill the following values. You can obtain Email JS service ID, Template ID and Public key from https://www.emailjs.com/
 
 ```sh
-OPENAI_API_KEY=your-openai-api-key
-DB_NAME=MySQL database name
-DB_USER=MySQL database user
-DB_PASSWORD=MySQL database password
-DB_HOST=localhost
-DB_DIALECT=mysql
-TOKEN_SECRET="your JWT token secret"
-cloud_name=cloudinary name for image storage
-api_key=cloudinary api key
-api_secret=cloudinary secret
+VITE_EMAILJS_SERVICE_ID=service_onyl73b
+VITE_EMAILJS_TEMPLATE_ID=template_8v1c0ho
+VITE_EMAILJS_PUBLIC_KEY=Z8FK6MGCDurMVaz6Q
 ```
 
 
-## Navigate to 'backend' folder and run the following
+## Navigate to 'portfolio' folder and run the following
 ```sh
 npm install
 ```
 ## After package installation is complete, run the following to start the backend server
 ```sh
-npm start
-```
-
-## Check if the express server is working by visiting the following URL. If your App is working, you will get success message.
-
-```sh
-http://localhost:5000/
-```
-
-## Navigate to 'frontend' folder and run the following
-```sh
-npm install
-```
-## After package installation is complete, run the following to start your react App
-```sh
 npm run dev
 ```
+
+## Visit the following URL. If your App is working, you will see the portfolio Application.
+
+```sh
+http://localhost:5173/
+```
+
 ## Now your App will run smoothly. Enjoy!
 
 ## Author
