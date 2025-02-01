@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to BizConnect 👋</h1>
 
-BizConnect is a contact directory management  application built by using React/Vite, React-Bootstrap, node.js/Express and MySQL database.
+BizConnect is a contact directory management  application built by using Typescript, React/Vite, React-Bootstrap, node.js/Express and MySQL database.
 
 BizConnect is a powerful and easy-to-use contact directory management app designed for companies. 
 It helps businesses store and organize essential contact details, including:
