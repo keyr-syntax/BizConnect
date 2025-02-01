@@ -5,7 +5,6 @@ import { AddCompany } from "./components/ui/AddCompany";
 import ViewDetails from "./components/ui/ViewDetails";
 import CompanyTable from "./components/ui/TestFile";
 import ContactList from "./components/ui/ContactList";
-import CreateNewContact from "./components/ui/CreateNewContact";
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
           <Route path="/view_details/:id" element={<ViewDetails />} />
           <Route path="/test" element={<CompanyTable />} />
           <Route path="/all_contacts" element={<ContactList />} />
-          <Route path="/create_new_contact" element={<CreateNewContact />} />
         </Route>
       </Routes>
     </>

@@ -13,7 +13,7 @@ export const createCompanyDetails = async (
     companyCategory,
     isDraft,
   } = req.body;
-
+  console.log("Body", req.body);
   if (
     !companyName ||
     companyName.trim() === "" ||
@@ -33,7 +33,6 @@ export const createCompanyDetails = async (
     where: {
       companyName: companyName,
       companyAddress: companyAddress,
-      companyWebsite: companyWebsite,
       companyCategory: companyCategory,
     },
   });

@@ -203,9 +203,9 @@ export default function ViewDetails() {
       {/*  */}
       {/*  */}
       {!loading && contactList && contactList.length > 0 && (
-        <Table className="text-white border border-solid w-[95%] mt-10">
+        <Table className="text-white border border-solid border-[rgb(255,255,255,0.2)] w-[95%] mt-10">
           <TableHeader>
-            <TableRow>
+            <TableRow className="border border-solid border-[rgb(255,255,255,0.2)]">
               <TableHead>Name</TableHead>
               <TableHead>Company</TableHead>
               <TableHead>Role</TableHead>
@@ -308,13 +308,22 @@ export default function ViewDetails() {
                     <Pencil
                       onClick={() => {
                         FetchContactByID(contact.id);
+                        contactStore.setState({
+                          COMPANY_ID: null,
+                        });
                       }}
                       size={28}
                       className="cursor-pointer"
                     />
                   )}
                   {contactID !== null && contactID === contact.id ? (
-                    <X />
+                    <X
+                      size={28}
+                      className="cursor-pointer text-red-700 "
+                      onClick={() => {
+                        contactStore.setState({ contactID: null });
+                      }}
+                    />
                   ) : (
                     <Trash2
                       onClick={() => {
@@ -420,7 +429,18 @@ export default function ViewDetails() {
       {!loading && COMPANY_ID === null && (
         <Button
           onClick={() => {
-            contactStore.setState({ COMPANY_ID: id });
+            contactStore.setState({
+              COMPANY_ID: id,
+              contactID: null,
+              contactName: "",
+              companyName: "",
+              COMPANY_NAME: "",
+              phone: null,
+              email: "",
+              role: "",
+              companyID: null,
+              loading: false,
+            });
           }}
           className="block w-auto bg-[#0D6EFD] text-lg hover:bg-[#0DEFD] mx-auto mt-5 p-2"
         >

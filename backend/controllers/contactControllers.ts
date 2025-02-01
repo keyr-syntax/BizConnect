@@ -26,6 +26,30 @@ export const createContactDetails = async (
     return;
   }
 
+  const doesContactExist = await CONTACT_LIST.findOne({
+    where: {
+      contactName: contactName,
+      role: role,
+      phone: phone,
+      email: email,
+      companyID: companyID,
+    },
+  });
+  if (doesContactExist) {
+    const fetchAllContactsByCompanyID = await CONTACT_LIST.findAll({
+      where: {
+        companyID: companyID,
+      },
+    });
+    res.status(400).json({
+      success: true,
+      message: "Company already exists",
+      contact: doesContactExist,
+      allContacts: fetchAllContactsByCompanyID,
+    });
+    return;
+  }
+
   try {
     const newContact = await CONTACT_LIST.create({
       contactName,

@@ -14,7 +14,7 @@ app.use("/contact", contactRoutes);
 app.get("/", (req, res) => {
   res.json({
     success: true,
-    message: "Backend for Contacto is working",
+    message: "Backend for BizConnect is working",
   });
 });
 
@@ -22,6 +22,6 @@ app.listen(5000, (error) => {
   if (error) {
     console.log("Error while starting server", error);
   } else {
-    console.log(`server is running on: http://localhost:5000`);
+    console.log("Server running on PORT:", 5000);
   }
 });

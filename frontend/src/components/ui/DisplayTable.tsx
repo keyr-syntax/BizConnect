@@ -41,10 +41,10 @@ export default function DisplayTable() {
     <>
       {loading && <Loading />}
       {!loading && company_list && company_list.length > 0 && (
-        <Table className="text-white mt-[80px] border border-solid  w-[95%]">
+        <Table className="text-white mt-[80px] border border-solid border-[rgb(255,255,255,0.2)]  w-[95%]">
           <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Company Name</TableHead>
+            <TableRow className="border border-solid border-[rgb(255,255,255,0.2)]">
+              <TableHead>Company Name</TableHead>
               <TableHead>Address</TableHead>
               <TableHead>Website</TableHead>
               <TableHead>Category</TableHead>

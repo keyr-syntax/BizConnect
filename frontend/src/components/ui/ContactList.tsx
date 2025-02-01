@@ -43,7 +43,7 @@ export default function ContactList() {
     <>
       {loading && <Loading />}
       {!loading && allContactsList && allContactsList.length > 0 && (
-        <Table className="text-white border border-solid w-[95%] mt-[80px]">
+        <Table className="text-white border border-solid border-[rgb(255,255,255,0.2)] w-[95%] mt-[80px]">
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>

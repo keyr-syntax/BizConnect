@@ -3,11 +3,10 @@ import { DataTypes, Model } from "sequelize";
 
 class COMPANY_LIST extends Model {
   id!: number;
-
+  companyName!: string;
   companyWebsite!: string;
   companyCategory!: string;
-
-  email!: string[];
+  companyAddress!: string;
   isDraft!: boolean;
 }
 
@@ -37,7 +36,6 @@ COMPANY_LIST.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-
     isDraft: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
