@@ -23,9 +23,9 @@ https://github.com/keyr-syntax/BizConnect.git
 Inside the backend folder fill the following values in .env file.
 
 ```sh
-DB_NAME=keyr
-DB_USER=root
-DB_PASSWORD=keyr
+DB_NAME=MySQL database name
+DB_USER=MySQL database user
+DB_PASSWORD=MySQL database password 
 ```
 
 Navigate to 'backend' folder and run the following
